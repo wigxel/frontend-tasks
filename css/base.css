@@ -34978,4 +34978,8 @@ body {
   font-family: "Abril Fatface", "Georgia", sans-serif;
 }
 
+[role=guide] {
+  display: none;
+}
+
 /*# sourceMappingURL=base.css.map */

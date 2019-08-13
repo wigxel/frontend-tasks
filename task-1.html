@@ -5,11 +5,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Task One: Simple Insertion</title>
+    <title>Task 1: DOM Manipulation</title>
+    <link rel="stylesheet" href="css/base.css">
+    <script src="js/loader.js"></script>
 </head>
 
 <body>
+    <main class="flex flex-col justify-center min-h-screen items-center">
+        <div class="post-card p-5 mb-5 rounded-lg shadow md:w-1/4">
+            <h3 class="text-2xl heading">Kelvin Kress</h3>
+            <p class="font-sans text-sm para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, unde
+                asperiores exercitationem totam
+                accusamus illum debitis, voluptate corporis vel officiis doloribus deleniti molestiae veniam ipsa
+                repudiandae ullam rem dolorum iure.</p>
+        </div>
+        <div class="flex" style="gap: 1rem" role="pagination">
+            <!-- add buttons here -->
+        </div>
+    </main>
+    <script>
+        const changePost = () => {
+            const url = 'https://jsonplaceholder.typicode.com/posts'
+            const postUrl = `${url}/${post_id}`
 
+            fetch() // enter postUrl here
+                .then(res => ) // convert response here
+                .then() //added replaceContent here
+        }
+
+        const replaceContent = ({
+            title,
+            body
+        }) => {
+
+        }
+
+        const activateButtons = () => {
+            // define buttons variable here
+
+            //loops through the buttons
+            buttons.forEach((button, i) => {
+                const index = i + 1; // index variable
+                button.addEventListener('click', () => {
+
+                })
+            })
+        }
+
+        const startApp = () => {
+            activateButtons()
+        }
+        startApp()
+    </script>
 </body>
 
 </html>
