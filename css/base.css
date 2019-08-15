@@ -34974,6 +34974,33 @@ video {
     z-index: auto;
   }
 }
+.fancy__list {
+  display: flex;
+  border: solid 1px grey;
+  overflow: hidden;
+  justify-content: space-between;
+}
+.fancy__list > .text {
+  flex: 1;
+  width: 100%;
+  padding: 1.4rem;
+}
+.fancy__list > button {
+  appearance: none;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 30px;
+  transition: all 0.3s ease-out;
+}
+.fancy__list > button:not(.toggle-btn) {
+  margin-right: -40px;
+}
+.fancy__list.is-active > button:not(.toggle-btn) {
+  margin-right: 0px !important;
+}
+
 body {
   font-family: "Abril Fatface", "Georgia", sans-serif;
 }

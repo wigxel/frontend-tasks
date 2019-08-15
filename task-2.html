@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Task 2: DOM Manipulation</title>
+  <link rel="stylesheet" href="css/base.css">
+</head>
+
+<body>
+  <main class="flex flex-col justify-center min-h-screen items-center">
+    <section class="w-1/2">
+      <div class="flex justify-between mb-5">
+        <hgroup>
+          <h1 class="text-3xl mb-0">Highend Phones</h1>
+          <h5 class="mt-0 font-sans">A <i>loop</i> use-case</h5>
+        </hgroup>
+        <button class="font-sans">REFRESH</button>
+      </div>
+      <ul class="list-holder p-0">
+        <div class="text-center border-2 border-gray rounded-lg">
+            <i class="font-sans text-gray">List will be added here</i>
+        </div>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+  const PHONE_MODELS = [
+    'Huawei Y7', 'Infinix', 'Tecno', 'iPhoneX',
+    'Xiomi', 'Oppo', 'Samsung',
+  ]
+
+  // adds the click event to 
+  const activeToggleButton = (listEl) => {
+    const arrowButton = listEl.querySelector('.toggle-btn');
+    const toggleAction = () => {
+      if (listEl.classList.contains('is-active')) {
+        listEl.classList.remove('is-active');
+        arrowButton.textContent = '<';
+      } else {
+        listEl.classList.add('is-active');
+        arrowButton.textContent = '>';
+      }
+    }
+
+    // call the toggleAction
+  }
+
+  const createList = () => {
+    // NB: Virtual Elements don't exist in DOM after creation. 
+    const listEl =  // creates a virtual Element
+    // adds a class to the Virtual Elements
+    listEl.innerHTML = `
+        <div class="text">${phone_name}</div>
+        <button class="toggle-btn">&lt;</button>
+        <button class="bg-teal-200">+</button>
+        <button class="bg-orange-200">-</button>
+        <button class="bg-red-200">x</button>
+    `;
+
+    return listEl
+  }
+
+  // adds the 
+  const addToList = (arr) => {
+    const listHolder = document.querySelector('.list-holder')
+    for (let listEl of arr) {
+      listHolder.append(listEl)
+    }
+
+  }
+
+  // runs the code
+  const startApp = () => {
+    // create the phoneList
+
+    for (let model of PHONE_MODELS) {
+      const listEl =  // call createList here
+    }
+
+    // call addToList here
+  }
+
+  // call startApp
+  
+  </script>
+</body>
+
+</html>
