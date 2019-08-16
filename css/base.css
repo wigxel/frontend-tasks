@@ -34975,9 +34975,11 @@ video {
   }
 }
 .fancy__list {
+  height: 70px;
   display: flex;
-  border: solid 1px grey;
   overflow: hidden;
+  border: solid 1px grey;
+  transition: all 0.3s ease-out;
   justify-content: space-between;
 }
 .fancy__list > .text {
@@ -34996,6 +34998,10 @@ video {
 }
 .fancy__list > button:not(.toggle-btn) {
   margin-right: -40px;
+}
+.fancy__list.hide__self {
+  height: 0px;
+  border: 10px;
 }
 .fancy__list.is-active > button:not(.toggle-btn) {
   margin-right: 0px !important;

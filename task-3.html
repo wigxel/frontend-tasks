@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task 3: Removing from the DOM</title>
+    <link rel="stylesheet" href="css/base.css">
+</head>
+
+<body>
+    <main class="flex flex-col justify-center min-h-screen items-center">
+        <section class="w-1/2">
+            <div class="flex justify-between mb-5">
+                <hgroup>
+                    <h1 class="text-3xl mb-0">Highend Phones</h1>
+                    <h5 class="mt-0 font-sans">A <i>loop</i> use-case</h5>
+                </hgroup>
+                <button role="refresh" class="font-sans">REFRESH</button>
+            </div>
+            <ul class="list-holder p-0">
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        const PhoneHolder = {
+            phones: [
+                'Huawei', 'Xiomi', 'Oppo', 'Samsung', 'Nokia', 'Motorola'
+            ],
+            get() {
+                return this.phones;
+            },
+            set(newPhones) {
+                return this.phones = newPhones;
+            }
+        }
+
+        // adds the click event to 
+        const activeToggleButton = (listEl) => {
+            const arrowButton = listEl.querySelector('.toggle-btn');
+            const toggleAction = () => {
+                if (listEl.classList.contains('is-active')) {
+                    listEl.classList.remove('is-active');
+                    arrowButton.textContent = '<';
+                } else {
+                    listEl.classList.add('is-active');
+                    arrowButton.textContent = '>';
+                }
+            }
+
+            // call the toggleAction
+            arrowButton.addEventListener('click', toggleAction);
+        }
+
+        // add activeDeleteButton function here
+
+        const createList = (phone_name) => {
+            // NB: Virtual Elements don't exist in DOM after creation. 
+            const listEl = document.createElement('li');
+            listEl.classList.add('fancy__list');
+            listEl.innerHTML = `
+                <div class="text">${phone_name}</div>
+                <button class="toggle-btn">&lt;</button>
+                <button class="bg-teal-200">+</button>
+                <button class="bg-orange-200">-</button>
+                <button class="bg-red-200" role="delete">x</button>
+            `;
+            const onDelete = () => {
+                const existingPhones = [];
+                for (let phone of PhoneHolder.get()) {
+                    if (phone !== phone_name) {
+                        existingPhones.push(phone);
+                    }
+                }
+                PhoneHolder.set(existingPhones)
+                refreshList();
+            }
+            activeToggleButton(listEl);
+            // invoke `activeDeleteButton` here.
+
+            return listEl
+        }
+
+        // adds the list to the DOM
+        const addToList = (arr) => {
+            const listHolder = document.querySelector('.list-holder')
+            listHolder.innerHTML = '';
+            for (let listEl of arr) {
+                listHolder.append(listEl)
+            }
+        }
+
+        const refreshList = () => {
+             // create the phoneList
+             const phoneList = []
+             for (let model of PhoneHolder.get()) {
+                const listEl = createList(model) // call createList here
+                phoneList.push(listEl)
+             }
+
+             // call addToList here
+             addToList(phoneList)
+        }
+
+        // add startApp function here
+
+        // call startApp
+        startApp()
+    </script>
+</body>
+
+</html>
