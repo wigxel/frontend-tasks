@@ -12,7 +12,10 @@ Create a function `startApp`. Inside the function get the refresh button from th
 
 #### Step 2: Creating the Delete function
 Create a function `activeDeleteButton` that takes in 2 parameters, `listEl` and `doAfterDelete` where the dataTypes are `Node` and `Function` respectively.  
-Create a `deleteButton` variable, get the `button` inside of `listEl` with the selector `button[role=delete]` (Attribute Selector) and assign it to `deleteButton`. 
+
+Inside of the `listEl` it's assumed we have a `<button role=delete>` element and we want to fetching it. Create a `deleteButton` variable, with the selector `button[role=delete]` (Attribute Selector) assign the `button` from inside the `listEl`. 
+
+> If you've having issues with the above instruction? see post on [Medium](https://medium.com/@josephowonwo/referencing-dom-nodes-easily-f94ce7d5a1ab?source=friends_link&sk=159d6205a681dc538740bffa0500824c)
 
 Add a click event listener to `deleteButton`. Inside the listener function do the following: 
 * Added add a class of `hide__self` to the `listEl`. 
@@ -34,8 +37,10 @@ Continue from the `deleteButton` click listener function:
 
 #### Step 4: Updating the List of Phones
 Inside the `setTimeout` function
-> Reminder: `doAfterDelete` is a function parameter. So that's why we can invoke it.
+> Reminder: `doAfterDelete` is a function parameter. So that's why we can invoke it.  
 * Invoke the `doAfterDelete()` function after the `listEl.outerHTML = ''` statement.
+
+> :confused: If you're wondering where the `doAfterDelete` function parameter was defined. You should look for where the `activeDeleteButton()` function was called. :wink:
 
 #### Finally: Study `callbacks`.
 Visit [Link](https://suhas.org/javascript-callbacks/ 'Understanding JS Callbacks') to understand `callbacks`. And then try to understand the code.
