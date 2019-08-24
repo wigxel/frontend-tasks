@@ -35003,6 +35003,9 @@ video {
   height: 0px;
   border: 10px;
 }
+.fancy__list.is-active > button.toggle-btn {
+  background-color: whitesmoke;
+}
 .fancy__list.is-active > button:not(.toggle-btn) {
   margin-right: 0px !important;
 }
