@@ -1,0 +1,28 @@
+{
+    "soldPhones": [],
+    "phones": [{
+            "name": "Huawei",
+            "quantity": 25
+        },
+        {
+            "name": "Xiomi",
+            "quantity": 56
+        },
+        {
+            "name": "Oppo",
+            "quantity": 5
+        },
+        {
+            "name": "Samsung",
+            "quantity": 50
+        },
+        {
+            "name": "Nokia",
+            "quantity": 45
+        },
+        {
+            "name": "Motorola",
+            "quantity": 3
+        }
+    ]
+}
