@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task 5: Fetch phones via XHR.</title>
+    <link rel="stylesheet" href="css/base.css">
+</head>
+
+<body>
+    <main class="flex justify-center min-h-screen">
+        <div class="container mx-auto py-20 flex">
+            <section class="flex-1">
+                <div class="flex justify-between mb-5">
+                    <hgroup>
+                        <h1 class="text-3xl mb-0">Highend Phones</h1>
+                        <h5 class="mt-0 font-sans"></h5>
+                    </hgroup>
+                    <button role="refresh" class="appearance-none py-2 px-4 border border-gray rounded-full font-sans">REFRESH</button>
+                </div>
+                <!-- add form here -->
+                <form id="insert-form" class="flex">
+                    <input type="text" placeholder="Add a phone model" class="flex-1 border border-gray-500 p-2 pl-5"/>
+                    <button class="px-4 appearance-none hover:bg-gray-200 border border-gray-900">INSERT</button>
+                </form>
+                <!-- add preloader -->
+                <div data-preload class="py-2 text-center bg-black text-white">Loading...</div>
+                <ul class="list-holder p-0">
+                </ul>
+            </section>
+            <section class="flex-1 ml-10 border border-gray-200 p-5">
+                <div class="flex justify-between mb-5">
+                    <h1>SOLD PHONES</h1>
+                </div>
+                <ul class="sold-list-holder p-0">
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const preload = () => {
+            const preloader = document.querySelector('[data-preload]')
+            setInterval(() => {
+                if (preloader.textContent.length >= 10) 
+                    preloader.textContent = "Loading"
+                preloader.append('.');
+            }, 1000);
+        }
+        const hidePreloader = () => {
+            document.querySelector('[data-preload]').classList.add('hidden')
+        }
+        const showPreloader = () => {
+            document.querySelector('[data-preload]').classList.remove('hidden')
+        }
+        
+        const PHONES_ENDPOINT = 'https://frontend-tasks.wigxel.now.sh/mocks/phones.json'
+        const PhoneHolder = {
+            soldPhones: [],
+            phones: [],
+            get() {
+                return this.phones;
+            },
+            set(newPhones) {
+                return this.phones = newPhones;
+            },
+            getSold() {
+                return this.soldPhones
+            },
+            setSold(phones) {
+                this.soldPhones = phones
+            },
+        }
+
+        // adds the click event to 
+        const activeToggleButton = (listEl) => {
+            const arrowButton = listEl.querySelector('.toggle-btn');
+            const toggleAction = () => {
+                if (listEl.classList.contains('is-active')) {
+                    listEl.classList.remove('is-active');
+                    arrowButton.textContent = '<';
+                } else {
+                    listEl.classList.add('is-active');
+                    arrowButton.textContent = '>';
+                }
+            }
+
+            // call the toggleAction
+            arrowButton.addEventListener('click', toggleAction);
+        }
+
+        // add activeDeleteButton function here
+        const activeDeleteButton = (listEl, doAfterDelete) => {
+            const deleteButton = listEl.querySelector('button[role=delete]');
+
+            deleteButton.addEventListener('click', () => {
+                listEl.classList.add('hide__self');
+
+                setTimeout(() => {
+                    listEl.outerHTML = '';
+                    doAfterDelete()
+                }, 1000);
+            })
+        }
+
+        const createList = (phone_name) => {
+            // NB: Virtual Elements don't exist in DOM after creation. 
+            const listEl = document.createElement('li');
+            listEl.classList.add('fancy__list');
+            listEl.innerHTML = `
+                <div class="text">${phone_name}</div>
+                <button class="toggle-btn">&lt;</button>
+                <button class="bg-teal-200" role="add-to-sold">+</button>
+                <button class="bg-orange-200">-</button>
+                <button class="bg-red-200" role="delete">x</button>
+            `;
+            const onDelete = () => {
+                const existingPhones = [];
+                for (let phone of PhoneHolder.get()) {
+                    if (phone !== phone_name) {
+                        existingPhones.push(phone);
+                    }
+                }
+                PhoneHolder.set(existingPhones)
+                refreshList();
+            }
+            activeToggleButton(listEl);
+            activeDeleteButton(listEl, onDelete);
+            // activateAddButton(listEl, phone_name);
+
+            return listEl
+        }
+
+        // adds the list to the DOM
+        const addToList = (arr, selector) => {
+            const listHolder = document.querySelector(selector)
+            listHolder.innerHTML = '';
+            for (let listEl of arr) {
+                listHolder.append(listEl)
+            }
+        }
+
+        const refreshList = () => {
+            // create the phoneList
+            const phoneList = []
+            const soldList = []
+            for (let model of PhoneHolder.get()) {
+                const listEl = createList(model)
+                phoneList.push(listEl)
+            }
+
+            for (let model of PhoneHolder.getSold()) {
+                const listEl = createList(model)
+                soldList.push(listEl)
+            }
+
+            // call addToList here
+            addToList(phoneList, '.list-holder');
+            addToList(soldList, '.sold-list-holder');
+        }
+
+        // add movePhoneToSold() here from the previous task
+        
+        // add the activeAddButton() here from the previous task
+
+        // add the activateInsertForm() here from the previous task
+
+        const startApp = () => {
+            const refreshButton = document.querySelector('[role=refresh]')
+            refreshButton.addEventListener('click', refreshList)
+            refreshButton.click();
+
+            preload();
+            setTimeout(() => {
+                fetchPhones();
+            }, 2000);
+            activateInsertForm();
+        }
+
+        startApp()
+    </script>
+</body>
+
+</html>
